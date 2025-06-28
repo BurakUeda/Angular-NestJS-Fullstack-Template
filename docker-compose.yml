@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  angular:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: angular_frontend
+    volumes:
+      - ./frontend:/app
+      - angular_node_modules:/app/node_modules
+    working_dir: /app
+    command: npm start
+    ports:
+      - "4200:4200"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: nest_backend
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    command: npm run start:dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_proxy
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./frontend/dist/${APP_NAME}:/usr/share/nginx/html
+    ports:
+      - "80:80"
+    depends_on:
+      - angular
+
+volumes:
+  pgdata:
+  angular_node_modules:
