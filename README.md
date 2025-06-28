@@ -14,7 +14,7 @@ You don't need Node.js installed on your computer — although as a developer, y
 ## 🛠️ Installation
 
 ### 1) Set Up Database Credentials
-Edit the `.env` file in the project root:
+Create a `.env` file in the project root:
 ```dotenv
 DB_NAME=app_db
 DB_USER=app_user
