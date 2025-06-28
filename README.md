@@ -21,7 +21,6 @@ DB_USER=app_user
 DB_PASSWORD=supersecurepassword
 ```
 ### 2) Create the Angular Frontend
-- Start the Docker application.
 - Open a terminal in your project’s root folder.
 - Run the following command to generate your Angular app inside the `frontend` folder.
    ```bash
