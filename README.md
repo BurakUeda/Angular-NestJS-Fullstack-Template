@@ -28,11 +28,12 @@ docker run -it --rm -v "${PWD}/frontend:/app" -w /app node:22 sh -c "npm install
 ```
 >🔧 Replace  `YOUR-APP-NAME-HERE` with your project name.
 3. To enable hot reload (instant updates on file change), edit `frontend/package.json`.
-- Change:
+ 
+Change:
 ```json
 "start": "ng serve",
 ```
-- To:
+To:
 ```json
 "start": "ng serve --host 0.0.0.0 --port 4200 --poll=1000",
 ```
@@ -54,13 +55,13 @@ docker-compose exec angular_frontend npm install tailwindcss @tailwindcss/postcs
 @import "tailwindcss";
 ```
 ### 4) Creating NestJS Backend
-- Open a terminal in your project’s root folder.
-- Run the following command to generate your NestJS app inside the `backend` folder.
+1. Open a terminal in your project’s root folder.
+2. Run the following command to generate your NestJS app inside the `backend` folder.
 ```bash
 docker run -it --rm -v "${PWD}/backend:/app" -w /app node:22 sh -c "npm install -g @nestjs/cli && nest new app --directory=. --skip-git --package-manager=npm --strict"
 ```
 ### 5) Build and Start All Services
-- Open a terminal in your project’s root folder, and run:
+Open a terminal in your project’s root folder, and run:
 ```bash
 docker-compose up --build -d
 ```
