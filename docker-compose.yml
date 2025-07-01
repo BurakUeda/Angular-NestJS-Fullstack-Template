@@ -1,7 +1,5 @@
-version: "3.9"
-
 services:
-  angular:
+  angular_frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -16,7 +14,7 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
 
-  backend:
+  nest_backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -30,7 +28,7 @@ services:
     depends_on:
       - db
 
-  db:
+  postgres_db:
     image: postgres:16
     container_name: postgres_db
     environment:
